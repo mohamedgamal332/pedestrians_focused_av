@@ -1,0 +1,16 @@
+# Network & Infrastructure
+governor_api: "http://[YOUR_DIGITALOCEAN_IP]:8000/predict"
+carla_host: "127.0.0.1"
+carla_port: 2000
+
+# Model Paths
+reflex_weights: "weights/active_reflex.pth"
+gold_weights: "weights/gold_reflex.pth"
+llama_path: "/hpc/models/llama-3.3-70b-instruct"
+embedding_model: "BAAI/bge-m3"
+
+# Safety & Control Thresholds
+critical_distance: 3.0       # Residual policy trigger (meters)
+audit_interval: 30           # Seconds between Llama audits
+target_speed_max: 10.0       # m/s (approx 36 km/h)
+horizon_lookahead: 25.0      # Local Goal distance (meters)
