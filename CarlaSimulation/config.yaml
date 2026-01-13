@@ -1,0 +1,73 @@
+simulation:
+  map: "Town10HD_Opt"
+  duration_seconds: 300
+  tick_rate: 15
+
+connection:
+  host: "localhost"
+  port: 2000
+  timeout: 30.0
+  max_retries: 12
+  retry_delay: 5.0
+  post_map_load_wait: 5.0
+
+traffic:
+  num_vehicles: 25
+  num_pedestrians: 100
+  pedestrian_cross_factor: 0.3
+  runner_ratio: 0.25
+  walk_speed_min: 0.8
+  walk_speed_max: 1.8
+  run_speed_min: 2.5
+  run_speed_max: 4.5
+
+jaywalking:
+  enabled: true
+  jaywalker_ratio: 0.3
+  safety_time_threshold: 4.0
+  safety_distance_threshold: 15.0
+  max_wait_time: 10.0
+  check_interval: 0.5
+  crossing_speed_multiplier: 1.3
+  approach_distance: 3.0
+  min_crossing_interval: 30.0
+
+sensors:
+  stereo_baseline: 0.54
+  camera_height: 1.5
+  camera_forward: 2.2
+  image_width: 1920
+  image_height: 1080
+  fov: 90
+  motion_blur_intensity: 0.0
+  motion_blur_max_distortion: 0.0
+  motion_blur_min_object_screen_size: 0.0
+
+visibility:
+  occlusion_threshold: 0.5
+  depth_tolerance_factor: 0.05
+  min_visible_bones: 3
+
+weather_presets:
+  - name: "ClearNoon"
+    cloudiness: 0
+    precipitation: 0
+    sun_altitude_angle: 70
+  - name: "CloudyNoon"
+    cloudiness: 70
+    precipitation: 0
+    sun_altitude_angle: 60
+  - name: "WetSunset"
+    cloudiness: 30
+    precipitation: 30
+    sun_altitude_angle: 15
+  - name: "SoftRainNight"
+    cloudiness: 80
+    precipitation: 50
+    sun_altitude_angle: -30
+
+output:
+  base_path: "./CarlaSimulation/output/sessions"
+  save_images: true
+  save_depth_raw: false
+  demo_interval: 1000
