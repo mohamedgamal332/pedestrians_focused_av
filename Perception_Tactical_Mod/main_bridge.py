@@ -1,10 +1,10 @@
 import carla
 import requests
 import time
-from goal_manager import GoalManager
-from reflex_agent import ReflexAgent
+from Perception_Tactical_Mod.goal_manager import GoalManager
+from Perception_Tactical_Mod.reflex_agent import ReflexAgent
 from safety_switch import EvasiveArbiter
-from actuator_pid import PIDController
+from Perception_Tactical_Mod.actuator_pid import PIDController
 
 class AutonomousBridge:
     def __init__(self, vehicle, world, govenor_url):
