@@ -1,0 +1,64 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv_yolopose/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Data and models
+data/
+work_dirs/
+output*/
+eval_output/
+*.pth
+*.pt
+*.ckpt
+*.npy
+*.pkl
+
+# Logs
+*.log
+*.out
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+stgcn_test/
+stgcn_test_images/
+stgcn_test_viz/
+gcn_per_pedestrian/
+gcn_per_pedestrian_augmented/
