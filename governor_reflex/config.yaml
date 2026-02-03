@@ -1,0 +1,80 @@
+# Governor-Reflex System Configuration
+
+# Paths
+paths:
+  model_path: "/home/jemmi/trajectory-system/models/alpamayo"
+  runtime_dir: "/home/jemmi/trajectory-system/runtime"
+  pcla_dir: "/home/jemmi/PCLA"
+
+# CARLA Settings
+carla:
+  host: "localhost"
+  port: 2000
+  map: "Town02"
+  tick_rate: 15  # Hz
+  timeout: 30.0
+
+# Traffic
+traffic:
+  num_vehicles: 10
+  num_pedestrians: 30
+
+# Camera Configuration (4 cameras for Alpamayo)
+cameras:
+  front_wide:
+    location: [2.2, 0.0, 1.5]  # x, y, z
+    rotation: [0.0, 0.0, 0.0]  # pitch, yaw, roll
+    fov: 120
+  front_tele:
+    location: [2.2, 0.0, 1.5]
+    rotation: [0.0, 0.0, 0.0]
+    fov: 50
+  cross_left:
+    location: [1.5, -0.8, 1.5]
+    rotation: [0.0, -60.0, 0.0]
+    fov: 90
+  cross_right:
+    location: [1.5, 0.8, 1.5]
+    rotation: [0.0, 60.0, 0.0]
+    fov: 90
+  image_width: 1920
+  image_height: 1080
+  frames_history: 4  # 4 frames at 10Hz = 0.4s
+
+# Alpamayo Model Settings
+alpamayo:
+  quantization: "int8"
+  device: "cuda"
+  max_new_tokens: 512
+  use_mock: false  # Set to true to force mock model for testing
+  
+# Trajectory Settings  
+trajectory:
+  num_waypoints: 64
+  dt: 0.1  # 10Hz
+  horizon_seconds: 6.4
+  
+# Timing
+timing:
+  egomotion_history_size: 16  # waypoints at 10Hz = 1.6s
+  replan_interval_seconds: 3.0
+  min_trajectory_buffer_seconds: 2.0
+  governor_timeout_seconds: 10.0
+  
+# Pedestrian Behavior Thresholds (m/s)
+pedestrian:
+  standing_threshold: 0.5
+  walking_threshold: 2.0
+  # Above walking_threshold = running
+  detection_radius: 50.0
+
+# Experiment Settings
+experiment:
+  include_pedestrian_info: true  # Toggle for A/B testing
+  mask_pedestrians_in_images: false  # If true, blacks out pedestrians when include_pedestrian_info is false
+  
+# Logging
+logging:
+  level: "INFO"
+  save_inputs: true
+  save_outputs: true
