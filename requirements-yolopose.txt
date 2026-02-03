@@ -1,0 +1,13 @@
+# YOLO Pose environment – minimal deps for yolo_pose_run.py and compare_pose_models.py (YOLO only)
+# Install: pip install -r requirements-yolopose.txt
+
+# Core: Ultralytics YOLO (includes PyTorch, OpenCV, numpy when installed via pip)
+ultralytics>=8.0.0
+
+# Evaluation / matching (used by yolo_pose_eval.py and rtmpose_eval.py)
+numpy>=1.20.0
+scipy>=1.7.0
+opencv-python>=4.5.0
+
+# Optional: if you use compare_pose_models.py with RTMPose too, you need the full
+# MMPose/MMDet stack – see ENVIRONMENT_SETUP.md instead.

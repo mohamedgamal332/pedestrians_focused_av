@@ -1,0 +1,16 @@
+# Conda environment for YOLO Pose only (no MMPose/MMDet).
+# Create: conda env create -f environment-yolopose.yml
+# Activate: conda activate yolopose
+
+name: yolopose
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.8,<3.12
+  - pip
+  - numpy
+  - scipy
+  - pip:
+    - ultralytics>=8.0.0
+    - opencv-python>=4.5.0
