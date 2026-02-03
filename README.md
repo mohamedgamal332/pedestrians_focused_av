@@ -2,6 +2,19 @@
 
 A comprehensive research platform for developing and evaluating pedestrian-aware autonomous vehicle systems. This project integrates simulation, pose estimation, trajectory prediction, and autonomous driving control with a focus on pedestrian safety and behavior understanding.
 
+## ⚡ Quick Start
+
+Choose your component of interest:
+
+1. **Just exploring?** → Check out the [example frames](#) and [repository structure](#-repository-structure)
+2. **Want to collect data?** → Start with [CARLA Simulation](#1-collect-training-data-with-carla)
+3. **Working on pose estimation?** → See [MMPose Library](#2-run-pose-estimation)
+4. **Need full autonomous control?** → Set up [Governor-Reflex System](#3-governor-reflex-system)
+
+**⚠️ Important for Governor-Reflex users**: This component requires two external repositories:
+- [Alpamayo](https://github.com/NVlabs/alpamayo) - Vision-language planning model
+- [PCLA](https://github.com/MasoudJTehrani/PCLA) - Low-level control system
+
 ## 🎯 Project Overview
 
 This repository contains a full pipeline for pedestrian-focused autonomous vehicle research:
@@ -71,10 +84,20 @@ pedestrians_focused_av/
 - **3D Triangulation**: Reconstruct pedestrian positions from stereo views
 
 ### Governor-Reflex Control Architecture
-- **Governor (Planning)**: Long-term trajectory planning using Alpamayo vision-language model
-- **Reflex (Control)**: Low-level reactive control with CaRL
+- **Governor (Planning)**: Long-term trajectory planning using Alpamayo vision-language model from NVIDIA
+  - Processes multi-camera inputs (front wide, front tele, cross left, cross right)
+  - Generates 64 waypoints at 10Hz (6.4 second horizon)
+  - Incorporates pedestrian behavior and risk assessment
+  - Runs in separate conda environment with Alpamayo model
+- **Reflex (Control)**: Low-level reactive control with CaRL/PCLA
+  - Real-time pedestrian tracking and trajectory management
+  - CARLA simulation integration with 4-camera setup
+  - Egomotion buffer for vehicle state history
+  - Route injection into PCLA control system
+- **Inter-Process Communication**: File-based communication between Governor and Reflex
 - **Pedestrian Integration**: Real-time pedestrian tracking and trajectory adjustment
 - **A/B Testing Support**: Toggle pedestrian information for ablation studies
+- **Mock Mode**: Built-in mock Alpamayo wrapper for testing without full model
 
 ## 🛠️ Installation
 
@@ -83,6 +106,7 @@ pedestrians_focused_av/
 - CARLA Simulator 0.9.15
 - CUDA-capable GPU (recommended)
 - Conda/Mamba package manager
+- Git (for cloning external repositories)
 
 ### Component-Specific Setup
 
@@ -103,16 +127,60 @@ pip install mmpose mmdet mmengine
 ```
 
 #### 3. Governor-Reflex System
+
+**⚠️ Important**: The Governor-Reflex system requires two external repositories to be installed:
+
+##### Required External Repositories
+
+1. **Alpamayo** (NVIDIA's vision-language planning model)
+   ```bash
+   # Clone Alpamayo repository
+   git clone https://github.com/NVlabs/alpamayo.git
+   cd alpamayo
+   # Follow installation instructions in the Alpamayo repository
+   ```
+
+2. **PCLA** (Predictive Control with Learned Action Priors)
+   ```bash
+   # Clone PCLA repository
+   git clone https://github.com/MasoudJTehrani/PCLA.git
+   cd PCLA
+   # Follow installation instructions in the PCLA repository
+   ```
+
+##### Setup Instructions
+
 ```bash
-# Create separate conda environments
+# Create separate conda environments for Governor and Reflex
+
+# 1. Governor Environment (Alpamayo-based planning)
 conda create -n alpo python=3.8
 conda activate alpo
-# Install Alpamayo dependencies...
+cd /path/to/alpamayo
+# Install Alpamayo dependencies (follow their README)
+pip install torch torchvision
+# Install additional governor dependencies
+pip install pyyaml numpy
 
+# 2. Reflex Environment (CaRL/PCLA control)
 conda create -n PCLA python=3.8
 conda activate PCLA
-# Install CaRL dependencies...
+cd /path/to/PCLA
+# Install PCLA dependencies (follow their README)
+pip install carla pyyaml numpy
+
+# 3. Update configuration paths
+cd /path/to/pedestrians_focused_av/governor_reflex
+# Edit config.yaml to set:
+#   - paths.model_path: /path/to/alpamayo/models
+#   - paths.pcla_dir: /path/to/PCLA
 ```
+
+**Configuration Notes**:
+- Update `governor_reflex/config.yaml` with correct paths to Alpamayo models and PCLA directory
+- The Governor process runs in the `alpo` conda environment
+- The Reflex process runs in the `PCLA` conda environment
+- Both processes communicate through shared runtime files
 
 ## 📖 Usage
 
@@ -164,16 +232,45 @@ python train_mamba_trajectory.py
 
 ### 5. Run Governor-Reflex System
 
+**Prerequisites**: 
+- CARLA simulator must be running
+- Both Alpamayo and PCLA repositories must be installed
+- Configuration file must be updated with correct paths
+
 ```bash
 cd governor_reflex
 
-# Terminal 1: Start Reflex (reactive control)
+# First, start CARLA in a separate terminal
+cd /path/to/carla
+./CarlaUE4.sh -RenderOffScreen -nosound
+
+# Terminal 1: Start Reflex (reactive control with CaRL/PCLA)
 conda activate PCLA
+export PYTHONPATH=$PYTHONPATH:/path/to/PCLA
 python reflex/main_reflex.py
 
-# Terminal 2: Start Governor (planning)
+# Terminal 2: Start Governor (high-level planning with Alpamayo)
 conda activate alpo
+export PYTHONPATH=$PYTHONPATH:/path/to/alpamayo
 python governor/main_governor.py
+
+# Or use the provided shell scripts
+./run_reflex.sh    # Starts the Reflex process
+./run_governor.sh  # Starts the Governor process
+```
+
+**How it works**:
+1. **Reflex** manages CARLA simulation, captures camera images, and tracks pedestrians
+2. **Reflex** periodically requests trajectory plans from Governor via shared files
+3. **Governor** processes camera images and pedestrian data through Alpamayo model
+4. **Governor** generates trajectory waypoints and returns them to Reflex
+5. **Reflex** injects trajectories into CaRL/PCLA for low-level control execution
+
+### 6. Pedestrian-Based Localization
+
+Explore the pedestrian-based positioning and localization techniques:
+```bash
+jupyter notebook pbplocalization.ipynb
 ```
 
 ## 📊 Data Format
@@ -282,9 +379,28 @@ jaywalking:
 
 ### Governor-Reflex (`governor_reflex/config.yaml`)
 ```yaml
+# Important: Update these paths after installing external dependencies
+paths:
+  model_path: "/path/to/alpamayo/models"
+  runtime_dir: "/path/to/runtime"
+  pcla_dir: "/path/to/PCLA"
+
 carla:
   host: "localhost"
   port: 2000
+  map: "Town02"
+
+# Camera configuration for Alpamayo (4-camera setup)
+cameras:
+  front_wide:
+    location: [2.2, 0.0, 1.5]
+    fov: 120
+  front_tele:
+    fov: 50
+  cross_left:
+    rotation: [0.0, -60.0, 0.0]
+  cross_right:
+    rotation: [0.0, 60.0, 0.0]
 
 trajectory:
   num_waypoints: 64
@@ -315,14 +431,43 @@ netstat -tlnp | grep 2000
 - Use `-quality-level=low` flag for CARLA
 
 ### Import Errors
-Ensure CARLA Python API is in your PYTHONPATH:
+
+**CARLA Python API**:
 ```bash
 export PYTHONPATH=$PYTHONPATH:/path/to/carla/PythonAPI/carla/dist/carla-0.9.15-*.egg
 ```
 
+**Alpamayo Module**:
+```bash
+# Make sure Alpamayo is installed and in PYTHONPATH
+export PYTHONPATH=$PYTHONPATH:/path/to/alpamayo
+# Test import
+python -c "import alpamayo_r1; print('Alpamayo OK')"
+```
+
+**PCLA Module**:
+```bash
+# Make sure PCLA is installed and in PYTHONPATH
+export PYTHONPATH=$PYTHONPATH:/path/to/PCLA
+# Test import
+python -c "from PCLA import PCLA; print('PCLA OK')"
+```
+
+### Governor-Reflex Issues
+
+**Error: "Cannot find alpamayo models"**
+- Update `paths.model_path` in `governor_reflex/config.yaml`
+- Ensure Alpamayo repository is properly installed
+- Use mock mode for testing: set `alpamayo.use_mock: true` in config
+
+**Error: "No PCLA instance set"**
+- Ensure PCLA repository is installed and in PYTHONPATH
+- Update `paths.pcla_dir` in `governor_reflex/config.yaml`
+- Check that Reflex process started successfully before Governor
+
 ## 📚 Dependencies
 
-Core dependencies:
+### Core Dependencies
 - **CARLA** 0.9.15: Simulation environment
 - **PyTorch**: Deep learning framework
 - **MMPose**: Pose estimation library
@@ -331,7 +476,27 @@ Core dependencies:
 - **OpenCV**: Image processing
 - **NumPy, Pandas**: Data manipulation
 
-See individual `requirements.txt` files in each component directory.
+### External Repositories (Required for Governor-Reflex)
+
+**⚠️ These must be installed separately**:
+
+1. **Alpamayo** - NVIDIA's vision-language planning model
+   - Repository: https://github.com/NVlabs/alpamayo
+   - Used by: Governor process for trajectory planning
+   - Environment: `alpo` conda environment
+
+2. **PCLA** - Predictive Control with Learned Action Priors (CaRL implementation)
+   - Repository: https://github.com/MasoudJTehrani/PCLA
+   - Used by: Reflex process for low-level control
+   - Environment: `PCLA` conda environment
+
+### Component-Specific Dependencies
+
+See individual `requirements.txt` files:
+- `CarlaSimulation/requirements.txt` - CARLA data collection
+- `MMPose-Lib-staging/requirements.txt` - Pose estimation and trajectory models
+
+**Note**: Governor-Reflex does not have a requirements.txt as it depends on the external Alpamayo and PCLA repositories, which have their own dependency management.
 
 ## 🤝 Contributing
 
@@ -350,9 +515,19 @@ See individual LICENSE files in component directories.
 
 ## 🔗 Related Projects
 
-- [CARLA Simulator](https://carla.org/)
-- [MMPose](https://github.com/open-mmlab/mmpose)
-- [MMDetection](https://github.com/open-mmlab/mmdetection)
+### Core Dependencies
+- [CARLA Simulator](https://carla.org/) - Open-source simulator for autonomous driving research
+- [MMPose](https://github.com/open-mmlab/mmpose) - OpenMMLab pose estimation toolbox
+- [MMDetection](https://github.com/open-mmlab/mmdetection) - OpenMMLab detection toolbox
+
+### Required External Repositories
+- [Alpamayo](https://github.com/NVlabs/alpamayo) - NVIDIA's vision-language model for trajectory planning
+- [PCLA](https://github.com/MasoudJTehrani/PCLA) - Predictive Control with Learned Action Priors (CaRL)
+
+### Related Research
+- PyTorch Geometric for Graph Neural Networks
+- Spatial-Temporal Graph Convolutional Networks (ST-GCN)
+- Vision-language models for autonomous driving
 
 ## 📧 Contact
 
@@ -361,11 +536,17 @@ For questions or issues, please open a GitHub issue.
 ## 🙏 Acknowledgments
 
 This project builds upon:
-- CARLA Simulator for realistic autonomous driving simulation
-- OpenMMLab ecosystem for pose estimation
-- Graph Neural Network research for temporal matching
-- Vision-language models for trajectory planning
+- **CARLA Simulator** for realistic autonomous driving simulation with pedestrian behaviors
+- **OpenMMLab ecosystem** (MMPose, MMDetection) for pose estimation and object detection
+- **Alpamayo** (NVIDIA) for vision-language trajectory planning capabilities
+- **PCLA/CaRL** for predictive control with learned action priors
+- **Graph Neural Network research** for temporal matching and trajectory prediction
+- **PyTorch and PyTorch Geometric** for deep learning and graph-based models
+
+Special thanks to the open-source communities maintaining these essential tools for autonomous driving research.
 
 ---
 
 **Note**: This is an active research platform. Some components may require additional setup or configuration based on your specific hardware and environment.
+
+**External Dependencies**: The Governor-Reflex system requires separate installation of [Alpamayo](https://github.com/NVlabs/alpamayo) and [PCLA](https://github.com/MasoudJTehrani/PCLA) repositories. Please follow their respective installation guides before using the Governor-Reflex components.
