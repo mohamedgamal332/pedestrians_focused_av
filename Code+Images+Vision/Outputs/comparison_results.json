@@ -1,0 +1,107 @@
+{
+  "mlp": {
+    "num_params": 85700,
+    "best_val_error": 1.070789855771222,
+    "baseline_error": 1.2347222132576023,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2947,
+      "total_predicted": 3059,
+      "correct_matches": 2947,
+      "precision": 0.9633867276887872,
+      "recall": 1.0,
+      "f1": 0.9813519813519813,
+      "mean_position_error": 1.1962991784535049,
+      "std_position_error": 2.7078881403356845,
+      "median_position_error": 0.06604004708043637,
+      "num_error_samples": 2947
+    },
+    "staged_training": true,
+    "has_predictor": true
+  },
+  "gru": {
+    "num_params": 448196,
+    "best_val_error": 1.0244494566991609,
+    "baseline_error": 1.2932431344285376,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    },
+    "staged_training": true,
+    "has_predictor": true
+  },
+  "lstm": {
+    "num_params": 316100,
+    "best_val_error": 1.0303393818933353,
+    "baseline_error": 1.2932431344285376,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    },
+    "staged_training": true,
+    "has_predictor": true
+  },
+  "mamba": {
+    "num_params": 502468,
+    "best_val_error": 1.0112683320631402,
+    "baseline_error": 1.2932431344285376,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    },
+    "staged_training": true,
+    "has_predictor": true
+  },
+  "kalman": {
+    "num_params": 35174,
+    "best_val_error": 1.1439146899435106,
+    "baseline_error": 1.2932431344285376,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    },
+    "staged_training": true,
+    "has_predictor": true
+  }
+}

@@ -1,0 +1,572 @@
+[
+  {
+    "epoch": 10,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_010.pt",
+    "val_error": 1.2856932406378265,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 20,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_020.pt",
+    "val_error": 1.217729278635945,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 30,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_030.pt",
+    "val_error": 1.1873309571807085,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 40,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_040.pt",
+    "val_error": 1.1751698412348897,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 50,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_050.pt",
+    "val_error": 1.172010956087072,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 60,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_060.pt",
+    "val_error": 1.1630583686235096,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 70,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_070.pt",
+    "val_error": 1.1703499547157126,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 80,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_080.pt",
+    "val_error": 1.1644060056988557,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 90,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_090.pt",
+    "val_error": 1.1661182191786705,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 100,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_100.pt",
+    "val_error": 1.174658568273002,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 110,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_110.pt",
+    "val_error": 1.161596970645845,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 120,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_120.pt",
+    "val_error": 1.1642993899349445,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 130,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_130.pt",
+    "val_error": 1.1533971342035534,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 140,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_140.pt",
+    "val_error": 1.1634571336452155,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 150,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_150.pt",
+    "val_error": 1.163775866911806,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 160,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_160.pt",
+    "val_error": 1.1651483526324282,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 170,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_170.pt",
+    "val_error": 1.164263112878867,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 180,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_180.pt",
+    "val_error": 1.1629252924440268,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 190,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_190.pt",
+    "val_error": 1.1552467438928478,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 200,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_200.pt",
+    "val_error": 1.1568809732520766,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 210,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_210.pt",
+    "val_error": 1.1692284615407402,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 220,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_220.pt",
+    "val_error": 1.1666349096716377,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 230,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_230.pt",
+    "val_error": 1.1618292781891884,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 240,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_240.pt",
+    "val_error": 1.1673435230740732,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 250,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_250.pt",
+    "val_error": 1.160030665121119,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 260,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_260.pt",
+    "val_error": 1.1719493503449154,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 270,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_270.pt",
+    "val_error": 1.173801361755738,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 280,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_280.pt",
+    "val_error": 1.173827778331967,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 290,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_290.pt",
+    "val_error": 1.1736289193640335,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  },
+  {
+    "epoch": 300,
+    "path": "/kaggle/working/Residual_Output/kalman/checkpoints/epoch_300.pt",
+    "val_error": 1.1749515589089508,
+    "evaluation": {
+      "confidence_threshold": 0.6,
+      "min_keypoints": 8,
+      "total_gt_matches": 2730,
+      "total_predicted": 2828,
+      "correct_matches": 2730,
+      "precision": 0.9653465346534653,
+      "recall": 1.0,
+      "f1": 0.982367758186398,
+      "mean_position_error": 1.2596414054377552,
+      "std_position_error": 2.777012844828738,
+      "median_position_error": 0.06283228335494508,
+      "num_error_samples": 2730
+    }
+  }
+]

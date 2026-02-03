@@ -1,0 +1,17 @@
+{
+  "model": "mamba",
+  "epoch": -1,
+  "horizon": 0,
+  "direction": {
+    "mean_error_deg": 56.67014945895181,
+    "std_error_deg": 55.276165763866686,
+    "median_error_deg": 33.93072139783065,
+    "count": 2512
+  },
+  "speed": {
+    "mean_error_mps": 2.013083522416211,
+    "std_error_mps": 3.017562547174296,
+    "median_error_mps": 0.6319955959711621,
+    "count": 2915
+  }
+}
