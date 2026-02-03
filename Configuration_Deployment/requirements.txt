@@ -1,9 +1,0 @@
-carla==0.9.16
-torch
-numpy
-pymilvus
-fastapi
-uvicorn
-flag-embedding
-pyyaml
-requests
