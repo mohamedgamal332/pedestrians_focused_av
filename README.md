@@ -429,7 +429,7 @@ python governor/main_governor.py
 4. **Governor** generates trajectory waypoints and returns them to Reflex
 5. **Reflex** injects trajectories into CaRL/PCLA for low-level control execution
 
-### 6. Pedestrian-Based Localization (PBPL)
+### 7. Pedestrian-Based Localization (PBPL)
 
 Explore the PBPL (Pedestrian-Based Position Localization) system for trajectory prediction and correction:
 ```bash
@@ -442,8 +442,6 @@ jupyter notebook Code+Images+Vision/PBPL.ipynb
 ```
 
 The PBPL system uses LSTM/GRU/Mamba models to predict future pedestrian trajectories and correct triangulation errors. See [Requirements and baseline results](./Code+Images+Vision/Requirements%20and%20baseline%20results.md) for detailed objectives and baseline metrics.
-
-### 7. Run Governor-Reflex System
 
 ## 📊 Data Format
 
