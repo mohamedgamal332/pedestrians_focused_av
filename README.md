@@ -43,6 +43,43 @@ pedestrians_focused_av/
 │   ├── data/                     # Dataset utilities
 │   └── save_mmpose_results.py    # Pose estimation inference
 │
+├── gcn_models/                   # GCN Model Architectures (NEW)
+│   ├── stgcn.py                 # Spatial-Temporal GCN implementation
+│   ├── ctrgcn.py                # Channel-Time Relation GCN
+│   ├── ctrgcn_motion.py         # CTR-GCN with motion features
+│   ├── tegcn.py                 # Temporal Enhanced GCN
+│   ├── sht.py                   # Spatial-Hierarchical Transformer
+│   ├── README.md                # Model documentation
+│   └── MODEL_SUMMARY.md         # Model specifications
+│
+├── gcn_training/                 # GCN Training & Evaluation (NEW)
+│   ├── gcn_train.py             # Main training script
+│   ├── gcn_train_all.py         # Multi-model training
+│   ├── gcn_finetune.py          # Fine-tuning script
+│   ├── gcn_eval.py              # Evaluation script
+│   ├── gcn_infer.py             # Inference script
+│   ├── gcn_analyze_data.py      # Data analysis utilities
+│   └── gcn_fetch_augment_data.py # Data augmentation
+│
+├── training_scripts/             # Automated Training Scripts (NEW)
+│   ├── finetune_stgcn.bat/sh    # ST-GCN fine-tuning
+│   ├── finetune_ctrgcn.bat/sh   # CTR-GCN fine-tuning
+│   ├── finetune_tegcn.bat/sh    # TE-GCN fine-tuning
+│   └── finetune_sht.bat/sh      # SHT fine-tuning
+│
+├── Code+Images+Vision/           # Trajectory Prediction Evaluations (NEW)
+│   ├── Evaluations/             # Evaluation results and analysis
+│   │   ├── docs/                # Analysis reports
+│   │   └── *.png                # Visualization plots
+│   ├── Outputs/                 # Model outputs and checkpoints
+│   │   ├── gru/                 # GRU model results
+│   │   ├── lstm/                # LSTM model results
+│   │   ├── mamba/               # Mamba model results
+│   │   ├── kalman/              # Kalman filter results
+│   │   └── mlp/                 # MLP baseline results
+│   ├── PBPL.ipynb               # Pedestrian-based position localization
+│   └── Requirements and baseline results.md
+│
 ├── Matching and Triangulation/   # Multi-camera matching and 3D reconstruction
 │   └── Matcher-temporal.ipynb    # GNN-based temporal matcher
 │
@@ -55,8 +92,47 @@ pedestrians_focused_av/
 │   │   └── pedestrian_tracker.py # Real-time tracking
 │   └── utils/                    # Shared utilities
 │
+├── data_loaders/                 # Data Loading Utilities
+│   ├── dataloader.py            # Generic data loader
+│   └── gcn_loader.py            # GCN-specific loader
+│
+├── data_preprocessing/           # Data Preparation Scripts
+│   ├── create_coco_annotations.py
+│   ├── create_splits.py
+│   ├── compute_state_vectors.py
+│   └── compute_risks_from_labeled.py
+│
+├── risk_scoring/                 # Risk Assessment Framework
+│   ├── risk_score.py
+│   └── compute_risks_from_labeled.py
+│
+├── plotting/                     # Visualization Tools
+│   ├── plot_training_history.py
+│   ├── plot_training_log.py
+│   └── coco_graph.py
+│
+├── pretrained_models/            # Pretrained Model Management
+│   ├── download_pretrained.py
+│   └── PRETRAINED_WEIGHTS_GUIDE.md
+│
+├── mmpose_setup/                 # RTMPose Integration
+│   ├── train_rtmpose.py
+│   ├── rtmpose_run.py
+│   └── rtmpose_eval.py
+│
 ├── pbplocalization.ipynb         # Pedestrian-based position localization
-└── frame_*.png                   # Example visualization frames
+├── evaluate_and_visualize.py     # Comprehensive evaluation script
+│
+└── Documentation Files:
+    ├── README.md                 # This file
+    ├── PROJECT_STRUCTURE.md      # Detailed structure documentation
+    ├── SETUP_AND_DEPLOYMENT.md   # Setup instructions
+    ├── GITHUB_DEPLOYMENT.md      # Git deployment guide
+    ├── GCN_TRAINING_GUIDE.md     # GCN training guide
+    ├── GCN_AUGMENTATION_GUIDE.md # Data augmentation guide
+    ├── FINETUNE_ALL_MODELS.md    # Multi-model fine-tuning
+    ├── FINETUNE_CTRGCN.md        # CTR-GCN specific guide
+    └── BATCH_SCRIPTS_GUIDE.md    # Batch scripts usage guide
 ```
 
 ## 🚀 Key Features
@@ -69,14 +145,33 @@ pedestrians_focused_av/
 - **Rich Annotations**: 3D skeleton data, behavior labels, and visibility states
 - **Robust Connection Handling**: Automatic retry logic for CARLA initialization
 
-### Pose Estimation & Trajectory Prediction
-- **Multiple Model Architectures**:
-  - STGCN: Spatial-Temporal Graph Convolutional Networks
-  - CTR-GCN: Channel-wise Topology Refinement GCN
-  - SHT: Spatial Hierarchical Transformer
-  - LSTM and Mamba-based models
-- **Risk Assessment**: Compute risk scores from pedestrian poses and trajectories
+### GCN-Based Trajectory Prediction (NEW)
+- **Multiple GCN Architectures**:
+  - **ST-GCN**: Spatial-Temporal Graph Convolutional Networks
+  - **CTR-GCN**: Channel-wise Topology Refinement GCN (60.67% baseline accuracy)
+  - **TE-GCN**: Temporal Enhanced GCN (custom architecture)
+  - **SHT**: Spatial-Hierarchical Transformer (state-of-the-art)
+- **Automated Training Pipeline**: Batch scripts for Windows and Linux
+- **Data Augmentation**: Synthetic sample generation for class imbalance
+- **Fine-tuning Support**: Transfer learning from pretrained models
+- **Comprehensive Evaluation**: Per-class metrics, confusion matrices, F1 scores
+
+### Trajectory Prediction with Sequence Models (NEW)
+- **Multiple Architectures Evaluated**:
+  - **Mamba**: Best performance (1.0113m error, 21.8% improvement)
+  - **GRU**: Strong baseline (1.0244m error, 20.8% improvement)
+  - **LSTM**: Classic approach (1.0303m error, 20.3% improvement)
+  - **Kalman Filter**: Lightweight (1.1439m error, 11.5% improvement)
+  - **MLP**: Simple baseline (1.0708m error, 13.3% improvement)
+- **Multi-Horizon Prediction**: Up to 30 frames ahead (1 second @ 30fps)
+- **Comprehensive Metrics**: Position, per-keypoint, bone length, correction analysis
+- **Pareto Analysis**: Accuracy vs recall tradeoff optimization
+- **Checkpoint System**: Progressive training with epoch-wise model saving
+
+### Pose Estimation & Risk Assessment
 - **Real-time Inference**: Integration with MMPose for pose estimation
+- **Risk Scoring**: Compute risk scores from pedestrian poses and trajectories
+- **Behavior Classification**: 5 classes (Walking, Running, Crossing, Waiting, Idle)
 
 ### Multi-Camera Matching
 - **Temporal Consistency**: Graph Neural Network-based matching across frames
@@ -219,18 +314,86 @@ Open and run:
 jupyter notebook "Matching and Triangulation/Matcher-temporal.ipynb"
 ```
 
-### 4. Train Trajectory Prediction Models
+### 4. Train GCN Models for Behavior Classification (NEW)
 
+#### Quick Start with Batch Scripts
+
+**Windows:**
 ```bash
-cd MMPose-Lib-staging/scripts
-
-# Train different models
-python train_transformer_trajectory.py
-python train_lstm_trajectory.py
-python train_mamba_trajectory.py
+cd training_scripts
+finetune_stgcn.bat
+finetune_ctrgcn.bat
+finetune_tegcn.bat
+finetune_sht.bat
 ```
 
-### 5. Run Governor-Reflex System
+**Linux/Mac:**
+```bash
+cd training_scripts
+chmod +x finetune_*.sh
+./finetune_stgcn.sh
+./finetune_ctrgcn.sh
+./finetune_tegcn.sh
+./finetune_sht.sh
+```
+
+#### Manual Training
+
+```bash
+# Train individual models
+python gcn_training/gcn_train.py --model stgcn --epochs 50 --batch_size 32
+python gcn_training/gcn_train.py --model ctrgcn --epochs 50 --batch_size 32
+
+# Train all models
+python gcn_training/gcn_train_all.py --epochs 50
+
+# Generate augmented data for class imbalance
+python gcn_training/gcn_fetch_augment_data.py --synthetic_samples 2000
+
+# Fine-tune with augmented data
+python gcn_training/gcn_finetune.py \
+    --model ctrgcn \
+    --pretrained_path work_dirs/gcn_training/ctrgcn/best_model.pth \
+    --augmented_data_dir ./gcn_per_pedestrian_augmented \
+    --epochs 30
+
+# Evaluate models
+python gcn_training/gcn_eval.py --model ctrgcn \
+    --checkpoint work_dirs/gcn_training/ctrgcn/best_model.pth
+```
+
+See detailed guides:
+- [GCN Training Guide](./GCN_TRAINING_GUIDE.md)
+- [Data Augmentation Guide](./GCN_AUGMENTATION_GUIDE.md)
+- [Fine-tune All Models](./FINETUNE_ALL_MODELS.md)
+- [Batch Scripts Guide](./BATCH_SCRIPTS_GUIDE.md)
+
+### 5. Train Trajectory Prediction Models (NEW)
+
+```bash
+# Train LSTM-based trajectory predictor
+cd MMPose-Lib-staging/scripts
+python train_lstm_trajectory.py
+
+# Train Mamba-based trajectory predictor
+python train_mamba_trajectory.py
+
+# Train Transformer-based trajectory predictor
+python train_transformer_trajectory.py
+
+# Evaluate and visualize all models
+cd ../..
+python evaluate_and_visualize.py
+```
+
+**Evaluation Results** (see `Code+Images+Vision/Evaluations/`):
+- **Best Model**: Mamba (1.0113m error, 21.8% improvement over baseline)
+- **Baseline Performance**: 1.2932m mean error
+- **Pareto Operating Points**:
+  - High accuracy: 0.8667m @ 74% recall
+  - High recall: 1.2596m @ 100% recall
+
+### 6. Run Governor-Reflex System
 
 **Prerequisites**: 
 - CARLA simulator must be running
@@ -266,12 +429,21 @@ python governor/main_governor.py
 4. **Governor** generates trajectory waypoints and returns them to Reflex
 5. **Reflex** injects trajectories into CaRL/PCLA for low-level control execution
 
-### 6. Pedestrian-Based Localization
+### 6. Pedestrian-Based Localization (PBPL)
 
-Explore the pedestrian-based positioning and localization techniques:
+Explore the PBPL (Pedestrian-Based Position Localization) system for trajectory prediction and correction:
 ```bash
+# Run comprehensive evaluation
+python evaluate_and_visualize.py
+
+# Or explore interactively
 jupyter notebook pbplocalization.ipynb
+jupyter notebook Code+Images+Vision/PBPL.ipynb
 ```
+
+The PBPL system uses LSTM/GRU/Mamba models to predict future pedestrian trajectories and correct triangulation errors. See [Requirements and baseline results](./Code+Images+Vision/Requirements%20and%20baseline%20results.md) for detailed objectives and baseline metrics.
+
+### 7. Run Governor-Reflex System
 
 ## 📊 Data Format
 
@@ -308,6 +480,54 @@ Each frame includes:
 }
 ```
 
+### GCN Training Data Format (NEW)
+
+**Input Shape**: `[N, C, T, V]`
+- **N**: Number of samples
+- **C**: Channels (2 for 2D coordinates, 3 for 3D)
+- **T**: Temporal frames (default: 30 frames @ 30fps = 1 second)
+- **V**: Vertices/Keypoints (17 for COCO skeleton)
+
+**Labels**: Integer class indices [0-4]
+- 0: Walking
+- 1: Running  
+- 2: Crossing
+- 3: Waiting_To_Cross
+- 4: Idle
+
+**Data Files**:
+- `gcn_per_pedestrian/data.npy` - Input skeleton sequences
+- `gcn_per_pedestrian/labels.npy` - Behavior class labels
+- `gcn_per_pedestrian_augmented/` - Augmented dataset with synthetic samples
+
+### Trajectory Prediction Output Format (NEW)
+
+Model checkpoints and training outputs are saved in structured directories:
+
+```
+Code+Images+Vision/Outputs/
+├── gru/
+│   ├── checkpoints/          # Epoch-wise model checkpoints
+│   │   ├── epoch_010.pt
+│   │   └── ...
+│   ├── gru_history.json      # Training history
+│   ├── gru_staged_model.pt   # Best model
+│   ├── checkpoint_summary.json
+│   └── plots/                # Training visualizations
+├── lstm/
+├── mamba/
+├── kalman/
+└── mlp/
+```
+
+**Evaluation Metrics** (see `Code+Images+Vision/Evaluations/`):
+- Mean/median position error
+- Per-keypoint accuracy
+- Bone length preservation
+- Direction and speed errors
+- Confidence vs error correlation
+- Pareto frontier analysis
+
 ### Pedestrian Behaviors
 | Behavior | Description | Speed Range |
 |----------|-------------|-------------|
@@ -323,39 +543,164 @@ Each frame includes:
 - **OUT_OF_FRAME**: Bone projects outside image
 - **BEHIND_CAMERA**: Bone is behind camera plane
 
+## 📈 Evaluation Results (NEW)
+
+### Trajectory Prediction Performance
+
+Comprehensive evaluation of sequence-based models for pedestrian trajectory prediction:
+
+| Model | Mean Error | Improvement | Parameters | Best For |
+|-------|------------|-------------|------------|----------|
+| **Mamba** | 1.0113m | 21.8% | 502,468 | Best accuracy |
+| **GRU** | 1.0244m | 20.8% | 448,196 | Speed/accuracy balance |
+| **LSTM** | 1.0303m | 20.3% | 316,100 | Reliable baseline |
+| **Kalman** | 1.1439m | 11.5% | 35,174 | Resource-constrained |
+| **MLP** | 1.0708m | 13.3% | 85,700 | Simple baseline |
+| **Baseline** | 1.2932m | - | - | Triangulation only |
+
+**Key Findings**:
+- All learning-based models outperform baseline triangulation
+- Mamba architecture achieves best performance with 21.8% error reduction
+- Lightweight Kalman filter still provides 11.5% improvement
+- Pareto-optimal operating points available for accuracy/recall tradeoff
+
+### GCN Behavior Classification
+
+Performance of GCN models on pedestrian behavior recognition:
+
+| Model | Before Fine-tuning | After Fine-tuning | Improvement |
+|-------|-------------------|-------------------|-------------|
+| **ST-GCN** | 18.07% | 70-80% | ~60% points |
+| **CTR-GCN** | 60.67% | 75-85% | ~20% points |
+| **TE-GCN** | 0.00% | 50-70% | ~60% points |
+| **SHT** | N/A | 80-90%* | - |
+
+*With Hyperformer pretrained weights
+
+**Class Distribution Challenge**:
+- Original dataset heavily imbalanced (60% Walking, 0% Waiting_To_Cross)
+- Data augmentation with 2000 synthetic samples addresses imbalance
+- Fine-tuning with augmented data improves minority class recognition
+
+### Pareto Operating Points
+
+Two optimal configurations for different deployment scenarios:
+
+**High Accuracy Mode**:
+- Confidence threshold: 0.3
+- Min keypoints: 12
+- Recall: 74.0%
+- Mean error: 0.8667m
+- Use case: Safety-critical applications
+
+**High Recall Mode**:
+- Confidence threshold: 0.3
+- Min keypoints: 4
+- Recall: 100.0%
+- Mean error: 1.2596m
+- Use case: Must-detect scenarios
+
+### Visualizations
+
+See `Code+Images+Vision/Evaluations/` for comprehensive visualizations:
+- Loss component analysis per architecture
+- Horizon-based error progression
+- Threshold analysis for Pareto optimization
+- Per-joint error heatmaps
+- Direction and speed error distributions
+- Training history and convergence plots
+
 ## 🔬 Research Applications
 
 This platform supports research in:
 
-- **Pedestrian Behavior Modeling**: Realistic jaywalking and crossing behaviors
-- **Pose-based Trajectory Prediction**: Forecasting pedestrian movements from body poses
+- **Pedestrian Behavior Modeling**: Realistic jaywalking and crossing behaviors with 5-class classification
+- **Graph-Based Action Recognition**: Multiple GCN architectures for skeleton-based behavior analysis
+- **Data Augmentation Techniques**: Synthetic sample generation to address class imbalance
+- **Pose-based Trajectory Prediction**: Multi-horizon forecasting using sequence models (LSTM, GRU, Mamba)
+- **Trajectory Correction**: Blending predicted and detected positions to minimize triangulation errors
 - **Multi-Modal Perception**: Combining RGB, depth, and skeleton data
 - **Occlusion Handling**: Robust tracking under partial visibility
 - **Safety-Critical Scenarios**: Testing AV responses to unpredictable pedestrians
 - **Ablation Studies**: Evaluating impact of pedestrian information on AV performance
+- **Pareto Optimization**: Balancing accuracy and recall for different deployment scenarios
+- **Benchmark Comparisons**: State space models vs RNNs vs classical filters for trajectory prediction
 
 ## 🎓 Model Architectures
 
-### Trajectory Prediction Models
+### GCN Models for Behavior Classification (NEW)
 
-1. **STGCN (Spatial-Temporal GCN)**
+The repository includes multiple GCN architectures for pedestrian behavior recognition:
+
+1. **ST-GCN (Spatial-Temporal GCN)**
    - Graph convolutions on skeleton topology
    - Temporal convolutions across frames
    - Efficient and fast inference
+   - Can use MMACTION2 pretrained weights
+   - Expected accuracy: 60-80% (with pretraining)
 
 2. **CTR-GCN (Channel-wise Topology Refinement)**
    - Learnable graph topology
    - Channel-wise feature refinement
    - State-of-the-art on action recognition
+   - Baseline: 60.67% → Fine-tuned: 75-85%
 
-3. **SHT (Spatial Hierarchical Transformer)**
+3. **TE-GCN (Temporal Enhanced GCN)**
+   - Custom temporal enhancement mechanisms
+   - Taylor expansion for temporal modeling
+   - Expected accuracy: 50-75%
+
+4. **SHT (Spatial Hierarchical Transformer)**
    - Hierarchical attention mechanism
    - Multi-scale spatial features
    - Long-range temporal dependencies
+   - Expected accuracy: 80-90% (with pretraining)
 
-4. **LSTM/Mamba-based Models**
-   - Sequential modeling of trajectories
-   - Recurrent architectures for temporal patterns
+**Behavior Classes**: Walking, Running, Crossing, Waiting_To_Cross, Idle
+
+See [gcn_models/README.md](./gcn_models/README.md) and [gcn_models/MODEL_SUMMARY.md](./gcn_models/MODEL_SUMMARY.md) for detailed specifications.
+
+### Trajectory Prediction Models (NEW)
+
+Sequence-based models for multi-horizon pedestrian trajectory forecasting:
+
+1. **Mamba-based Model** ★ Best Performance
+   - State space model architecture
+   - Mean error: 1.0113m (21.8% improvement over baseline)
+   - 502,468 parameters
+   - Best for accuracy-critical applications
+
+2. **GRU (Gated Recurrent Unit)**
+   - Lightweight recurrent architecture
+   - Mean error: 1.0244m (20.8% improvement)
+   - 448,196 parameters
+   - Good balance of speed and accuracy
+
+3. **LSTM (Long Short-Term Memory)**
+   - Classic sequence modeling
+   - Mean error: 1.0303m (20.3% improvement)
+   - 316,100 parameters
+   - Reliable and well-tested
+
+4. **Kalman Filter**
+   - Traditional filtering approach
+   - Mean error: 1.1439m (11.5% improvement)
+   - 35,174 parameters (most lightweight)
+   - Best for resource-constrained deployments
+
+5. **MLP Baseline**
+   - Simple feedforward network
+   - Mean error: 1.0708m (13.3% improvement)
+   - 85,700 parameters
+   - Baseline for comparison
+
+**Key Features**:
+- Multi-horizon prediction (1-30 frames, ~1 second)
+- Position, keypoint, and bone length correction
+- Confidence-based blending of predictions and detections
+- Pareto-optimal operating points for accuracy/recall tradeoff
+
+See [Code+Images+Vision/Evaluations/docs/analysis_report.md](./Code+Images+Vision/Evaluations/docs/analysis_report.md) for comprehensive evaluation results.
 
 ## ⚙️ Configuration
 
@@ -425,10 +770,61 @@ ps aux | grep CarlaUE4
 netstat -tlnp | grep 2000
 ```
 
+### GCN Training Issues (NEW)
+
+**Low accuracy after training**:
+```bash
+# Check data quality
+python gcn_training/gcn_analyze_data.py --data_dir ./gcn_per_pedestrian
+
+# Check for class imbalance - if severe:
+python gcn_training/gcn_fetch_augment_data.py --synthetic_samples 2000
+python gcn_training/gcn_finetune.py --model ctrgcn --augmented_data_dir ./gcn_per_pedestrian_augmented
+```
+
+**CUDA out of memory**:
+- Reduce batch size: `--batch_size 16` or `--batch_size 8`
+- Use CPU: `--device cpu`
+- Use gradient accumulation
+
+**Model not converging**:
+- Lower learning rate: `--lr 0.0001`
+- Increase epochs: `--epochs 100`
+- Use pretrained weights (ST-GCN): `--pretrained_path pretrained_weights/stgcn/...`
+
+**"Waiting_To_Cross" class has 0% accuracy**:
+- This is expected if dataset lacks this class
+- Generate augmented data: `python gcn_training/gcn_fetch_augment_data.py`
+- Fine-tune on augmented dataset
+
+**Batch scripts not running**:
+- Windows: Run from Command Prompt, not PowerShell
+- Linux: Make executable first: `chmod +x finetune_*.sh`
+
+### Trajectory Prediction Issues (NEW)
+
+**High prediction errors**:
+- Check confidence threshold settings
+- Verify input data quality (triangulation accuracy)
+- Ensure sufficient training data (>1000 sequences)
+- Try different model architectures (Mamba typically best)
+
+**Training too slow**:
+- Reduce sequence length in config
+- Use smaller model (MLP or Kalman)
+- Enable mixed precision training
+- Reduce checkpoint frequency
+
+**Checkpoints not loading**:
+- Verify checkpoint path is correct
+- Check PyTorch version compatibility
+- Ensure model architecture matches checkpoint
+
 ### GPU Memory Issues
 - Use lower quality CARLA maps (Town03 instead of Town10HD_Opt)
 - Reduce number of pedestrians/vehicles
 - Use `-quality-level=low` flag for CARLA
+- For GCN training: reduce batch size or use gradient checkpointing
 
 ### Import Errors
 
@@ -495,8 +891,38 @@ python -c "from PCLA import PCLA; print('PCLA OK')"
 See individual `requirements.txt` files:
 - `CarlaSimulation/requirements.txt` - CARLA data collection
 - `MMPose-Lib-staging/requirements.txt` - Pose estimation and trajectory models
+- `requirements-yolopose.txt` - Main project dependencies
+- `environment-yolopose.yml` - Conda environment specification
 
 **Note**: Governor-Reflex does not have a requirements.txt as it depends on the external Alpamayo and PCLA repositories, which have their own dependency management.
+
+## 📖 Documentation
+
+This repository includes comprehensive documentation to help you get started:
+
+### Setup & Deployment
+- **[SETUP_AND_DEPLOYMENT.md](./SETUP_AND_DEPLOYMENT.md)** - Complete setup instructions for all components
+- **[GITHUB_DEPLOYMENT.md](./GITHUB_DEPLOYMENT.md)** - Guide for pushing code to GitHub
+- **[PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md)** - Detailed directory structure and file organization
+
+### GCN Training & Evaluation
+- **[GCN_TRAINING_GUIDE.md](./GCN_TRAINING_GUIDE.md)** - Complete guide for training GCN models
+- **[GCN_AUGMENTATION_GUIDE.md](./GCN_AUGMENTATION_GUIDE.md)** - Data augmentation to handle class imbalance
+- **[FINETUNE_ALL_MODELS.md](./FINETUNE_ALL_MODELS.md)** - Multi-model fine-tuning workflow
+- **[FINETUNE_CTRGCN.md](./FINETUNE_CTRGCN.md)** - Detailed CTR-GCN fine-tuning guide
+- **[BATCH_SCRIPTS_GUIDE.md](./BATCH_SCRIPTS_GUIDE.md)** - Using automated training scripts (.bat/.sh)
+
+### Model Documentation
+- **[gcn_models/README.md](./gcn_models/README.md)** - GCN model architectures overview
+- **[gcn_models/MODEL_SUMMARY.md](./gcn_models/MODEL_SUMMARY.md)** - Model specifications and parameters
+- **[pretrained_models/PRETRAINED_WEIGHTS_GUIDE.md](./pretrained_models/PRETRAINED_WEIGHTS_GUIDE.md)** - Pretrained model management
+
+### Evaluation & Analysis
+- **[Code+Images+Vision/Requirements and baseline results.md](./Code+Images+Vision/Requirements%20and%20baseline%20results.md)** - PBPL project requirements and baseline
+- **[Code+Images+Vision/Evaluations/docs/analysis_report.md](./Code+Images+Vision/Evaluations/docs/analysis_report.md)** - Comprehensive trajectory prediction evaluation
+
+### Component-Specific Guides
+- **[CarlaSimulation/README.md](./CarlaSimulation/README.md)** - CARLA data collection detailed guide
 
 ## 🤝 Contributing
 
