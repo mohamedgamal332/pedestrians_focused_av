@@ -566,19 +566,13 @@ Comprehensive evaluation of sequence-based models for pedestrian trajectory pred
 
 Performance of GCN models on pedestrian behavior recognition:
 
-| Model | Before Fine-tuning | After Fine-tuning | Improvement |
-|-------|-------------------|-------------------|-------------|
-| **ST-GCN** | 18.07% | 70-80% | ~60% points |
-| **CTR-GCN** | 60.67% | 75-85% | ~20% points |
-| **TE-GCN** | 0.00% | 50-70% | ~60% points |
-| **SHT** | N/A | 80-90%* | - |
+| Model          | Epoch | Acc (%) | Benchmark Acc. (%) | Params (M) | Benchmark Params (M) |
+|----------------|-------|---------|---------------------|-----------|----------------------|
+| CTR-GCN        | 58    | **96**  | 84.9                | **0.86**  | 1.45                 |
+| CTR-GCN Motion | 40    | **95**  | --                  | **1.72**  | 2.90                 |
+| TE-GCN         | 52    | **94**  | 93.4                | 0.86      | --                   |
+| ST-GCN         | 52    | **93**  | 81.5 / 88.3          | **0.86**  | 3.10                 |
 
-*With Hyperformer pretrained weights
-
-**Class Distribution Challenge**:
-- Original dataset heavily imbalanced (60% Walking, 0% Waiting_To_Cross)
-- Data augmentation with 2000 synthetic samples addresses imbalance
-- Fine-tuning with augmented data improves minority class recognition
 
 ### Pareto Operating Points
 
