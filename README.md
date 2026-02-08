@@ -25,6 +25,15 @@ This repository contains a full pipeline for pedestrian-focused autonomous vehic
 4. **Matching & Triangulation**: Multi-camera pedestrian matching and 3D localization
 5. **Autonomous Control**: Governor-Reflex architecture for pedestrian-aware driving
 
+## 📝 Thesis Documentation
+
+A comprehensive LaTeX appendix for thesis documentation is available in [`thesis_appendix.tex`](thesis_appendix.tex). This document includes:
+- Complete system architecture and methodology
+- Detailed model descriptions and mathematical formulations
+- Implementation details and code examples
+- Experimental results and evaluation metrics
+- See [`THESIS_APPENDIX_README.md`](THESIS_APPENDIX_README.md) for compilation instructions
+
 ## 📁 Repository Structure
 
 ```
